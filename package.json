@@ -1,0 +1,29 @@
+{
+  "name": "leetcode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "IntToRoman.js",
+  "scripts": {
+    "test": "jest",
+    "jw": "jest --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kmeshavkin/leetcode.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kmeshavkin/leetcode/issues"
+  },
+  "homepage": "https://github.com/kmeshavkin/leetcode#readme",
+  "dependencies": {
+    "@types/jest": "^24.0.15",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "jest": "^24.8.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.1.0",
+    "eslint-config-google": "^0.13.0"
+  }
+}
