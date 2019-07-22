@@ -1,4 +1,4 @@
-import {intToRoman} from './IntToRoman';
+import { intToRoman } from './IntToRoman';
 
 describe('Int to Roman', () => {
   test('3 returns III', () => expect(intToRoman(3)).toBe('III'));
