@@ -57,3 +57,25 @@ export const longestCommonPrefix = function(strs) {
   }
   return result;
 };
+
+/** https://leetcode.com/problems/3sum/
+ * Finds all unique triplets in the array which gives the sum of zero
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+export const threeSum = function(nums) {
+  nums = nums.sort((a, b) => a - b);
+  const hashArr = {};
+  for (let i = 0; i < nums.length - 2; i++) {
+    for (let j = i + 1, k = nums.length - 1; j < k;) {
+      if (-nums[i] > nums[j] + nums[k]) j++;
+      else if (-nums[i] < nums[j] + nums[k]) k--;
+      else {
+        hashArr[`${nums[i]},${nums[j]}`] = [nums[i], nums[j], nums[k]];
+        j++;
+        k--;
+      }
+    }
+  }
+  return Object.values(hashArr);
+};

@@ -2,7 +2,7 @@
   "name": "leetcode",
   "version": "1.0.0",
   "description": "",
-  "main": "IntToRoman.js",
+  "main": "debug.js",
   "scripts": {
     "test": "jest",
     "jw": "jest --watchAll"
