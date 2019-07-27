@@ -79,3 +79,71 @@ export const threeSum = function(nums) {
   }
   return Object.values(hashArr);
 };
+
+/** https://leetcode.com/problems/letter-combinations-of-a-phone-number/
+ * Map numbers to all possible letter combinations from telephone keyboard
+ * @param {string} digits Digits to map to letters
+ * @return {string[]} All possible combinations
+ */
+export const letterCombinations = function([...digits]) {
+  if (!digits.length) return [];
+  const keyboard = [
+    [' '], [], ['a', 'b', 'c'], ['d', 'e', 'f'],
+    ['g', 'h', 'i'], ['j', 'k', 'l'], ['m', 'n', 'o'],
+    ['p', 'q', 'r', 's'], ['t', 'u', 'v'], ['w', 'x', 'y', 'z'],
+  ];
+  return digits.reduce((convertedArray, digit) => {
+    return convertedArray.reduce((allPrev, prev) => {
+      return allPrev.concat(keyboard[digit].length
+        ? keyboard[digit].map((letter) => prev + letter)
+        : prev);
+    }, []);
+  }, ['']);
+};
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/** https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+ * Given a linked list, remove the n-th node from the end of list and return its head.
+ * @param {ListNode} head First element in linked list
+ * @param {number} n n-th element to delete from the end
+ * @return {ListNode} Linked list with removed element
+ */
+export const removeNthFromEnd = function(head, n) {
+  let pointerFirst = head;
+  let pointerSecond = head;
+  let counter = 0;
+  while (pointerFirst.next !== null) {
+    pointerFirst = pointerFirst.next;
+    if (counter >= n) pointerSecond = pointerSecond.next;
+    counter++;
+  }
+  if (counter - n < 0) head = head.next;
+  else pointerSecond.next = pointerSecond.next.next;
+  return head;
+};
+
+/** https://leetcode.com/problems/valid-parentheses/
+ * Given a string containing just the characters '(', ')', '{', '}', '[' and ']',
+ * determine if the input string is valid.
+ * @param {string} s String to check validity in
+ * @return {boolean} If string is valid or not
+ */
+export const isValid = function([...s]) {
+  const hash = {
+    '(': ')',
+    '[': ']',
+    '{': '}',
+  };
+  const stack = [];
+  for (let i = 0; i < s.length; i++) {
+    if (hash[s[i]] !== undefined) stack.push(s[i]);
+    else if (hash[stack.pop()] !== s[i]) return false;
+  }
+  return stack.length ? false : true;
+};
