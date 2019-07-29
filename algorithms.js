@@ -147,3 +147,26 @@ export const isValid = function([...s]) {
   }
   return stack.length ? false : true;
 };
+
+/** https://leetcode.com/problems/merge-two-sorted-lists/
+ * Merge two sorted linked lists and return it as a new list.
+ * @param {ListNode} l1 First linked list
+ * @param {ListNode} l2 Second linked list
+ * @return {ListNode} Combined linked list
+ */
+export const mergeTwoLists = function(l1, l2) {
+  const result = new ListNode();
+  let iResult = result;
+  while (l1 && l2) {
+    if (l1.val < l2.val) {
+      iResult.next = l1;
+      l1 = l1.next;
+    } else {
+      iResult.next = l2;
+      l2 = l2.next;
+    }
+    iResult = iResult.next;
+  }
+  iResult.next = l1 || l2;
+  return result.next;
+};
