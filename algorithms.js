@@ -170,3 +170,20 @@ export const mergeTwoLists = function(l1, l2) {
   iResult.next = l1 || l2;
   return result.next;
 };
+
+/** https://leetcode.com/problems/generate-parentheses/
+ * Given n pairs of parentheses, write a function to generate all
+ * combinations of well-formed parentheses.
+ * @param {number} n Number of pairs of parentheses
+ * @param {string} [str=''] String of one of combinations passed down until it meets requirements
+ * @param {number} [left=0] Number of left parentheses in string (to avoid counting it each time)
+ * @param {number} [right=0] Number of right parentheses in string (to avoid counting it each time)
+ * @return {string[]} All combinations of well-formed parentheses
+ */
+export const generateParenthesis = function(n, str = '', left = 0, right = 0) {
+  let arr = [];
+  if (str.length == n * 2) return str;
+  if (left < n) arr = arr.concat(generateParenthesis(n, str + '(', left + 1, right));
+  if (right < n && right < left) arr = arr.concat(generateParenthesis(n, str + ')', left, right + 1));
+  return arr;
+};

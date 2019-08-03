@@ -1,4 +1,12 @@
-import {intToRoman, romanToInt, longestCommonPrefix as lp, threeSum, letterCombinations as lc, isValid} from './algorithms';
+import {
+  intToRoman,
+  romanToInt,
+  longestCommonPrefix as lp,
+  threeSum,
+  letterCombinations as lc,
+  isValid,
+  generateParenthesis as gp,
+} from './algorithms';
 
 describe('Int to Roman', () => {
   test('3 returns III', () => expect(intToRoman(3)).toBe('III'));
@@ -48,4 +56,14 @@ describe('Valid parantheses', () => {
   test('([)] is NOT valid', () => expect(isValid('([)]')).toBe(false));
   test('{[]} is valid', () => expect(isValid('{[]}')).toBe(true));
   test('[ is NOT valid', () => expect(isValid('[')).toBe(false));
+});
+
+describe('Valid parantheses', () => {
+  test('Returns expected results', () => expect(gp(3)).toStrictEqual([
+    '((()))',
+    '(()())',
+    '(())()',
+    '()(())',
+    '()()()',
+  ]));
 });
