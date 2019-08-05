@@ -6,6 +6,8 @@ import {
   letterCombinations as lc,
   isValid,
   generateParenthesis as gp,
+  strStr,
+  search,
 } from './algorithms';
 
 describe('Int to Roman', () => {
@@ -58,7 +60,7 @@ describe('Valid parantheses', () => {
   test('[ is NOT valid', () => expect(isValid('[')).toBe(false));
 });
 
-describe('Valid parantheses', () => {
+describe('Generate parantheses', () => {
   test('Returns expected results', () => expect(gp(3)).toStrictEqual([
     '((()))',
     '(()())',
@@ -66,4 +68,23 @@ describe('Valid parantheses', () => {
     '()(())',
     '()()()',
   ]));
+});
+
+describe('Substring in string', () => {
+  test('Returns expected results', () => expect(strStr('hello', 'll')).toBe(2));
+  test('If not found, return -1', () => expect(strStr('aaaaa', 'bba')).toBe(-1));
+  test('If needle is empty, return 0', () => expect(strStr('a', '')).toBe(0));
+});
+
+describe('Search in sorted shifted array', () => {
+  test('Returns correct index', () => {
+    expect(search([4, 5, 6, 7, 0, 1, 2], 0)).toBe(4);
+    expect(search([4, 5, 6, 7, 0, 1, 2], 5)).toBe(1);
+    expect(search([1, 3, 5], 3)).toBe(1);
+    expect(search([1, 3, 5], 5)).toBe(2);
+    expect(search([1, 3], 2)).toBe(-1);
+    expect(search([1, 3], 1)).toBe(0);
+  });
+  test('Returns correct index if array length is 1', () => expect(search([1], 1)).toBe(0));
+  test('Returns -1 if target is not found', () => expect(search([4, 5, 6, 7, 0, 1, 2], 3)).toBe(-1));
 });

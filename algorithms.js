@@ -187,3 +187,42 @@ export const generateParenthesis = function(n, str = '', left = 0, right = 0) {
   if (right < n && right < left) arr = arr.concat(generateParenthesis(n, str + ')', left, right + 1));
   return arr;
 };
+
+/** https://leetcode.com/problems/implement-strstr/
+ * Return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+ * @param {string} haystack
+ * @param {string} needle
+ * @return {number}
+ */
+export const strStr = function(haystack, needle) {
+  if (!needle) return 0;
+  for (let i = 0; i < haystack.length; i++) {
+    for (let j = 0; j < needle.length; j++) {
+      if (haystack[i + j] !== needle[j]) break;
+      if (j === needle.length - 1) return i;
+    }
+  }
+  return -1;
+};
+
+/** https://leetcode.com/problems/search-in-rotated-sorted-array/
+ * Find target in sorted shifted array in O(log n)
+ * @param {number[]} nums Array sorted in ascending order is rotated at some pivot unknown beforehand
+ * @param {number} target Target to search
+ * @return {number} Index or -1 if not found
+ */
+export const search = function(nums, target) {
+  let left = 0;
+  let right = nums.length - 1;
+  do {
+    if (nums[left] === target) return left;
+    if ((right - left <= 1) && (nums[right] === target)) return right;
+    const prevLeft = left;
+    left = Math.ceil((right - left) / 2) + left;
+    if ((nums[left] < nums[right]) ^ ((target - nums[left]) * (target - nums[right]) <= 0)) {
+      right = left;
+      left = prevLeft;
+    }
+  } while (left < right);
+  return -1;
+};
