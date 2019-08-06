@@ -8,6 +8,9 @@ import {
   generateParenthesis as gp,
   strStr,
   search,
+  mySqrt,
+  mySqrtLog,
+  mySqrtAlgo,
 } from './algorithms';
 
 describe('Int to Roman', () => {
@@ -87,4 +90,55 @@ describe('Search in sorted shifted array', () => {
   });
   test('Returns correct index if array length is 1', () => expect(search([1], 1)).toBe(0));
   test('Returns -1 if target is not found', () => expect(search([4, 5, 6, 7, 0, 1, 2], 3)).toBe(-1));
+});
+
+describe('MySqrt, O(n) solution', () => {
+  test('Returns expected results', () => {
+    expect(mySqrt(0)).toBe(0);
+    expect(mySqrt(2)).toBe(1);
+    expect(mySqrt(3)).toBe(1);
+    expect(mySqrt(4)).toBe(2);
+    expect(mySqrt(8)).toBe(2);
+    expect(mySqrt(80)).toBe(8);
+    expect(mySqrt(81)).toBe(9);
+    expect(mySqrt(645)).toBe(25);
+    expect(mySqrt(3150)).toBe(56);
+    expect(mySqrt(97812)).toBe(312);
+    expect(mySqrt(10298374)).toBe(3209);
+    expect(mySqrt(938745092)).toBe(30638);
+  });
+});
+
+describe('MySqrt, O(log2(n)) solution', () => {
+  test('Returns expected results', () => {
+    expect(mySqrtLog(0)).toBe(0);
+    expect(mySqrtLog(2)).toBe(1);
+    expect(mySqrtLog(3)).toBe(1);
+    expect(mySqrtLog(4)).toBe(2);
+    expect(mySqrtLog(8)).toBe(2);
+    expect(mySqrtLog(80)).toBe(8);
+    expect(mySqrtLog(81)).toBe(9);
+    expect(mySqrtLog(645)).toBe(25);
+    expect(mySqrtLog(3150)).toBe(56);
+    expect(mySqrtLog(97812)).toBe(312);
+    expect(mySqrtLog(10298374)).toBe(3209);
+    expect(mySqrtLog(938745092)).toBe(30638);
+  });
+});
+
+describe('MySqrt, O(log10(n)) solution', () => {
+  test('Returns expected results', () => {
+    expect(mySqrtAlgo(0)).toBe(0);
+    expect(mySqrtAlgo(2)).toBe(1);
+    expect(mySqrtAlgo(3)).toBe(1);
+    expect(mySqrtAlgo(4)).toBe(2);
+    expect(mySqrtAlgo(8)).toBe(2);
+    expect(mySqrtAlgo(80)).toBe(8);
+    expect(mySqrtAlgo(81)).toBe(9);
+    expect(mySqrtAlgo(645)).toBe(25);
+    expect(mySqrtAlgo(3150)).toBe(56);
+    expect(mySqrtAlgo(97812)).toBe(312);
+    expect(mySqrtAlgo(10298374)).toBe(3209);
+    expect(mySqrtAlgo(938745092)).toBe(30638);
+  });
 });

@@ -226,3 +226,97 @@ export const search = function(nums, target) {
   } while (left < right);
   return -1;
 };
+
+/** https://leetcode.com/problems/sqrtx
+ * Compute and return the square root of x, where x is guaranteed to be a non-negative integer.
+ * Uses linear search. O(n) time complexity.
+ * @param {number} x Number to find square root from
+ * @return {number}  Truncated square root result
+ */
+export const mySqrt = function(x) {
+  let result = 1;
+  while (result * result <= x) result++;
+  return result - 1;
+};
+
+/** https://leetcode.com/problems/sqrtx
+ * Compute and return the square root of x, where x is guaranteed to be a non-negative integer.
+ * Uses binary search. O(log2(n)) time complexity.
+ * @param {number} x Number to find square root from
+ * @return {number}  Truncated square root result
+ */
+export const mySqrtLog = function(x) {
+  let start = 0;
+  let end = x;
+  let res = 0;
+  while (start < end) {
+    res = Math.ceil((start + end) / 2);
+    if (res * res <= x && (res + 1) * (res + 1) > x) return res;
+    if (res * res < x) start = res;
+    else end = res;
+  }
+  return res;
+};
+
+/** https://leetcode.com/problems/sqrtx
+ * Compute and return the square root of x, where x is guaranteed to be a non-negative integer.
+ * Uses this algorithm: https://www.homeschoolmath.net/teaching/square-root-algorithm.php
+ * O(log10(n)) time complexity
+ * @param {number} x Number to find square root from
+ * @return {number} Truncated square root result
+ */
+export const mySqrtAlgo = function(x) {
+  // quotient is a result which we assemble during for loop
+  // divisor is number in brackets from example (e.g. (45))
+  // dividend is number we get after subtraction (e.g. 2 after 6 - 4 in example)
+
+  // Prepare first iteration (calculate values for the first pair)
+  const source = cutString(String(x)); // Convert to array of pairs
+  let quotient = String(findSqrt(source[0])); // Get square root of first pair. It's the first number of the answer
+  let dividend = (source[0] - quotient * quotient); // 2 in example (result of 6 - 4)
+
+  // This for loop works for all pairs except of first (which was processed above)
+  for (let i = 1; i < source.length; i++) {
+    dividend = dividend + source[i]; // add next pair
+    const tempD = String(findClosest(quotient * 2, dividend)); // _ in example (in 4_)
+    const divisor = String(quotient * 2) + tempD; // actual divisor (where 4_ became 45)
+    dividend = dividend - (divisor * tempD); // perform subtraction
+    quotient += tempD; // finally get new quotient (result) for current iteration
+  }
+  return Number(quotient);
+};
+
+/** Used to cut string in pairs
+ * @param {string} str String to cut in pairs
+ * @return {string[]} Array with pairs in it (first element can be single digit)
+ */
+function cutString(str) {
+  const chunks = [str.substr(0, 2 - str.length % 2)];
+  str = str.substr(2 - str.length % 2);
+  const length = Math.ceil(str.length / 2);
+  for (let i = 0; i < length; i++) {
+    chunks.push(str.substr(i * 2, 2));
+  }
+  return chunks;
+}
+
+/** Used to find first square root (binary search will be slower here)
+ * @param {number} num Number to find square root from
+ * @return {string[]} Square root result
+ */
+function findSqrt(num) {
+  let result = 1;
+  while (result * result <= num) result++;
+  return result - 1;
+};
+
+/** Used to find _ (*something* from example) (binary search will be slower here as well)
+ * @param {number} num Number to find last digit (123_)
+ * @param {number} target Number to use as target
+ * @return {number} Result in _, that justifies expression
+ */
+function findClosest(num, target) {
+  let result = 0;
+  while ((num * 10 + result) * result <= target) result++;
+  return result - 1;
+}
