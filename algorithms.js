@@ -320,3 +320,38 @@ function findClosest(num, target) {
   while ((num * 10 + result) * result <= target) result++;
   return result - 1;
 }
+
+/** https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/solution/
+ * Given an array of integers nums sorted in ascending order, find the starting and ending position of a given target value.
+ * @param {number[]} nums Sorted array to find positions in
+ * @param {number} target Target value to find
+ * @return {number[]} Starting and ending positions in form of [start; end]
+ */
+export const searchRange = function(nums, target) {
+  const output = [-1, -1];
+  const left = binarySearchRange(nums, target, (c1, c2) => c1 >= c2);
+  if (nums[left] !== target) return [-1, -1];
+  output[0] = left;
+  const right = binarySearchRange(nums, target, (c1, c2) => c1 > c2);
+  output[1] = nums[right] === target ? right : right - 1;
+  return output;
+};
+
+/**
+ * Binary search with custom condition
+ * @param {number[]} nums Sorted array to find positions in
+ * @param {number} target Target value to find
+ * @param {function} condition Custom condition which triggers return
+ * @return {number} position in array
+ */
+function binarySearchRange(nums, target, condition) {
+  let l = 0;
+  let r = nums.length - 1;
+  let m = Math.floor((r - l) / 2) + l;
+  while (l < r) {
+    if (condition(nums[m], target)) r = m;
+    else l = m + 1;
+    m = Math.floor((r - l) / 2) + l;
+  }
+  return m;
+}

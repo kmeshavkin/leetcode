@@ -11,6 +11,7 @@ import {
   mySqrt,
   mySqrtLog,
   mySqrtAlgo,
+  searchRange,
 } from './algorithms';
 
 describe('Int to Roman', () => {
@@ -141,4 +142,16 @@ describe('MySqrt, O(log10(n)) solution', () => {
     expect(mySqrtAlgo(10298374)).toBe(3209);
     expect(mySqrtAlgo(938745092)).toBe(30638);
   });
+});
+
+describe('Search range', () => {
+  test('Returns expected results', () => {
+    expect(searchRange([5, 7, 7, 8, 8, 10], 8)).toStrictEqual([3, 4]);
+    expect(searchRange([2, 2], 2)).toStrictEqual([0, 1]);
+    expect(searchRange([1, 2, 2], 2)).toStrictEqual([1, 2]);
+    expect(searchRange([0, 0, 1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 6, 6, 6, 8, 10, 10], 4)).toStrictEqual([10, 13]);
+  });
+  test('Correctly returns if there\'s only one target value', () => expect(searchRange([5, 7, 7, 8, 8, 10], 10)).toStrictEqual([5, 5]));
+  test('Returns -1 if not found', () => expect(searchRange([5, 7, 7, 8, 8, 10], 6)).toStrictEqual([-1, -1]));
+  test('Correctly returns if array of length 1', () => expect(searchRange([1], 1)).toStrictEqual([0, 0]));
 });
